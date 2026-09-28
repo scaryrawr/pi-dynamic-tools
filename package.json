@@ -1,0 +1,37 @@
+{
+  "name": "pi-dynamic-tools",
+  "version": "0.1.0",
+  "description": "Centralized discovery and activation of pi extension tools",
+  "keywords": ["pi-package", "pi", "tools", "discovery"],
+  "license": "MIT",
+  "type": "module",
+  "files": ["extensions/config.ts", "extensions/dynamic-tools.ts", "extensions/model-selector.ts", "extensions/register.ts", "extensions/search.ts"],
+  "exports": {
+    ".": "./extensions/register.ts"
+  },
+  "scripts": {
+    "typecheck": "tsgo --noEmit",
+    "test": "vitest run",
+    "check": "npm run typecheck && npm test"
+  },
+  "dependencies": {
+    "typebox": "^1.3.34"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-ai": "^0.86.1",
+    "@earendil-works/pi-coding-agent": "^0.86.1",
+    "@earendil-works/pi-tui": "^0.86.1",
+    "@typescript/native-preview": "^7.0.0-dev.20260707.2",
+    "@types/node": "^26.6.2",
+    "vitest": "^5.0.1"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-ai": "*",
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "pi": {
+    "extensions": ["./extensions/dynamic-tools.ts"]
+  }
+}
