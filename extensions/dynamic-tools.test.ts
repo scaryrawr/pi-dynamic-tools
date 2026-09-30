@@ -5,7 +5,7 @@ import { join } from "node:path";
 import type { ExtensionAPI, ExtensionCommandContext, ExtensionContext, ToolDefinition } from "@earendil-works/pi-coding-agent";
 import { defineTool } from "@earendil-works/pi-coding-agent";
 import { Type } from "typebox";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { registerDynamicTool } from "pi-dynamic-tools";
 
 import dynamicTools from "./dynamic-tools.ts";
@@ -78,6 +78,21 @@ function harness({ deferRegistry = false } = {}) {
     getActive: () => active,
   };
 }
+
+// Keep every test away from the real ~/.pi/agent config (e.g. a developer's
+// configured semanticModel) so "missing configuration" stays deterministic.
+let isolateDir: string;
+let previousAgentDir: string | undefined;
+beforeEach(() => {
+  previousAgentDir = process.env.PI_CODING_AGENT_DIR;
+  isolateDir = mkdtempSync(join(tmpdir(), "pi-dynamic-tools-test-"));
+  process.env.PI_CODING_AGENT_DIR = isolateDir;
+});
+afterEach(() => {
+  if (previousAgentDir === undefined) delete process.env.PI_CODING_AGENT_DIR;
+  else process.env.PI_CODING_AGENT_DIR = previousAgentDir;
+  rmSync(isolateDir, { recursive: true, force: true });
+});
 
 describe("dynamic tool discovery", () => {
   it("collects tools regardless of load order and keeps them hidden until searched", async () => {
