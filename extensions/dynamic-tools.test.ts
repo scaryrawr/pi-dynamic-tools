@@ -2,7 +2,7 @@ import { mkdtempSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 
-import type { ExtensionAPI, ExtensionCommandContext, ExtensionContext, ToolDefinition } from "@earendil-works/pi-coding-agent";
+import type { ExtensionAPI, ExtensionCommandContext, ExtensionContext, ExtensionToolContext, ToolDefinition } from "@earendil-works/pi-coding-agent";
 import { defineTool } from "@earendil-works/pi-coding-agent";
 import { Type } from "typebox";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -63,7 +63,7 @@ function harness({ deferRegistry = false } = {}) {
   async function search(query: string, mode?: string) {
     const tool = tools.get("search_tools");
     if (!tool) throw new Error("search_tools not registered");
-    const ctx = { modelRegistry: {} } as ExtensionContext;
+    const ctx = { modelRegistry: {} } as ExtensionToolContext;
     return tool.execute("id", { query, mode }, undefined, undefined, ctx);
   }
   return {

@@ -14,15 +14,13 @@
     "test": "vitest run",
     "check": "npm run typecheck && npm test"
   },
-  "dependencies": {
-    "typebox": "^1.3.34"
-  },
   "devDependencies": {
-    "@earendil-works/pi-ai": "^0.87.1",
-    "@earendil-works/pi-coding-agent": "^0.87.1",
-    "@earendil-works/pi-tui": "^0.87.1",
+    "@earendil-works/pi-ai": "^0.99.1",
+    "@earendil-works/pi-coding-agent": "^0.99.1",
+    "@earendil-works/pi-tui": "^0.99.1",
     "@typescript/native-preview": "^7.0.0-dev.20260707.2",
     "@types/node": "^26.6.2",
+    "typebox": "^1.3.34",
     "vitest": "^5.0.1"
   },
   "peerDependencies": {
