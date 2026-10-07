@@ -1,5 +1,17 @@
 # pi-dynamic-tools
 
+> **Retired for Pi 0.99.1+.** Pi provides a native deferred-tool catalog and
+> built-in `tool_search` for on-demand discovery and activation. Remove this
+> extension from Pi settings and enable `"defaultTools": ["+tool_search"]`.
+> Replace `registerDynamicTool(pi, tool)` or event publication with
+> `pi.registerTool({ ...tool, exposure: "deferred" })`; no registry dependency
+> is needed. Use `pi.registerMcpServer()` and built-in MCP support for servers.
+>
+> Built-in search uses keyword ranking, not the optional small-model semantic
+> mode. `pi-dynamic-tools.json` and `/search-tools-model` are no longer used;
+> keep the old config only for rollback. The remainder documents the legacy
+> extension, not built-in Pi support.
+
 A pi package that gives extensions one shared `search_tools` tool. Contributing extensions publish tool definitions to a shared registry. The definitions are registered with pi but **inactive** until a search selects them; pi exposes the selected tool schemas to the model on its next request.
 
 ## Install
